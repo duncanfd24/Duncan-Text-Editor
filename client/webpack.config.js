@@ -20,7 +20,7 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'J.A.T.E'
+        title: 'Jate'
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
@@ -29,9 +29,9 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'Just Another Text Editor',
-        short_name: 'J.A.T.E',
-        description: 'Takes notes with JavaScript syntax highlighting!',
+        name: 'Editor',
+        short_name: 'jate',
+        description: 'Notes with JS',
         background_color: '#225ca3',
         theme_color: '#225ca3',
         start_url: '/',
@@ -49,6 +49,21 @@ module.exports = () => {
     module: {
       rules: [
         
+ {
+  test: /\.css$/i,
+  use: ['style-loader', 'css-loader'],
+},
+{
+  test: /\.m?js$/,
+  exclude: /node_modules/,
+  use: {
+    loader: 'babel-loader',
+    options: {
+      presets: ['@babel/preset-env'],
+      plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+    },
+  },
+},
       ],
     },
   };
